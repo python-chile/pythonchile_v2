@@ -1,0 +1,96 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyc
+*.cpython-34
+*.cpython-35
+*.cpython-36
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+#dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+# db.sqlite3
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+#database
+*.sql
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Celery files #
+################
+celerybeat-schedule.db
+celerybeat-schedule
+celerybeat.pid
+celeryev.pid
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+#Icon?
+ehthumbs.db
+Thumbs.db
+# Packages
+*.egg-info
+#dist
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+*~
+
+# Media file
+media/
+
+# VSCODE
+.vscode/
