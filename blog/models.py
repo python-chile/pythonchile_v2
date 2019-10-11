@@ -6,6 +6,8 @@ from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
 
+from wagtailcodeblock.blocks import CodeBlock
+
 
 class BlogPage(Page):
     ''' Displays a lists of PostPages'''
@@ -22,6 +24,7 @@ class PostPage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
+        ('code', CodeBlock(label='Code')),
         ('image', ImageChooserBlock()),
 
     ], blank=True, null=True)
