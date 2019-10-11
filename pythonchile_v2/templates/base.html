@@ -25,6 +25,14 @@
         {% endblock %}
     </head>
 
+    <ul class="nav navbar-nav">
+    {% for menu in menuitems %}
+        <li>
+            <a href="{{menu.url}}">{{menu.title}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
