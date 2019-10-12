@@ -14,7 +14,7 @@ Este es código del [sitio de Python Chile](http://pythonchile.cl) desarrollada 
 ## Por hacer
 
 - [x] Blog
-- [ ] Registro de usuario
+- [x] Registro de usuario
 - [ ] Integrar HTML básico
 - [ ] Mejorar readme
-- [ ] Licencia
+- [x] Licencia
