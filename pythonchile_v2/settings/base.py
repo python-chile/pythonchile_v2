@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
     # Custom apps
@@ -54,6 +55,10 @@ INSTALLED_APPS = [
 
     # Third party
     'wagtailcodeblock',
+    'django_extensions',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
 ]
 
@@ -89,6 +94,15 @@ TEMPLATES = [
         },
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 WSGI_APPLICATION = 'pythonchile_v2.wsgi.application'
 
@@ -171,3 +185,7 @@ BASE_URL = 'http://www.pythonchile.cl'
 
 # Code block
 WAGTAIL_CODE_BLOCK_THEME = 'okaidia'
+
+SITE_ID = 1
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'home.forms.EditorSignupForm'
