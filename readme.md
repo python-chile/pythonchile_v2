@@ -3,23 +3,18 @@ Pythonchile.cl web
 
 Este es código del [sitio de Python Chile](http://pythonchile.cl) desarrollada con Django y Wagtail.
 
+### Usuarios de desarrollo
+##### Rol -> username / pass
 
-# Usuarios demo local
+- Admin: admin / local_password
+- Editor: editor / local_password
+- Moderador: moderador / local_password
 
-Admin
-user: admin
-
-Editor
-user: editor
-password: local_password
-
-Moderador
-user: moderador
-password: local_password
 
 ## Por hacer
--
-- ¿Cómo levantar el proyecto de forma local?
-- ¿Cómo contribuir?
-- Licencia
 
+- [x] Blog
+- [ ] Registro de usuario
+- [ ] Integrar HTML básico
+- [ ] Mejorar readme
+- [ ] Licencia
