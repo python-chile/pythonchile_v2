@@ -11,7 +11,12 @@
 <h1>Home v0.1</h1>
 
 <ul>
-	<li><a href="{% url 'account_signup' %}">Registrate para publicar</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="{% url 'account_logout' %}">Cerrar sesión</a></li>
+	{% else %}
+		<li><a href="{% url 'account_signup' %}">Registrate</a></li>
+		<li><a href="{% url 'account_login' %}">Login</a></li>
+	{% endif %}
 </ul>
 
 {% endblock content %}

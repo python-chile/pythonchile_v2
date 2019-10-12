@@ -15,7 +15,7 @@ import os
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
-
+SITE_ID = 1
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -186,6 +186,7 @@ BASE_URL = 'http://www.pythonchile.cl'
 # Code block
 WAGTAIL_CODE_BLOCK_THEME = 'okaidia'
 
-SITE_ID = 1
-
+# django-allauth config
 ACCOUNT_SIGNUP_FORM_CLASS = 'home.forms.EditorSignupForm'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_REDIRECT_URL = '/admin/'
