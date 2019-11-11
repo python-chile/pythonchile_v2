@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {% comment %} <meta name="description" content="">
         <meta name="author" content=""> {% endcomment %}
+        <link rel='shortcut icon' type='image/png' href='{% static 'img/favicon.png' %}'/>
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
@@ -41,7 +42,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <a class="navbar-brand" href="/">Python Chile</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
@@ -55,15 +56,17 @@
             </li>
             {% endfor %}
 
-            <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="post.html">Sample Post</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-            </li>
+            {% comment %} Registration, login & logout {% endcomment %}
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'account_logout' %}">Cerrar sesión</a>
+                </li>
+            {% else %}
+                <li class="nav-item"><a href="{% url 'account_signup' %}">Registrate</a></li>
+                <li class="nav-item"><a href="{% url 'account_login' %}">Login</a></li>
+            {% endif %}
+            </ul>
+
             </ul>
         </div>
         </div>
@@ -117,9 +120,6 @@
 
         <!-- Custom scripts for this template -->
         <script src="{% static 'js/clean-blog.js' %}"></script>
-
-
-
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/pythonchile_v2.js' %}"></script>
