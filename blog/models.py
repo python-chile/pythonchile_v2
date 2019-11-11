@@ -17,10 +17,22 @@ class BlogPage(Page):
         FieldPanel('description', classname="full")
     ]
 
+    def get_context(self, request, *args, **kwargs):
+        ''' Used for adding menu items'''
+        context = super(BlogPage, self).get_context(request, *args, **kwargs)
+        context['menuitems'] = Page.objects.filter(
+            live=True, show_in_menus=True)
+        context['blog_posts'] = PostPage.objects.filter(
+            live=True).order_by('-date')
+        return context
+
 
 class PostPage(Page):
     ''' Post content '''
     date = models.DateField("Fecha publicación")
+    description = models.CharField("Descripción", max_length=255, blank=True)
+    image = models.ImageField("Imagen principal", blank=True, null=True)
+
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
@@ -30,6 +42,15 @@ class PostPage(Page):
     ], blank=True, null=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('description', classname="full"),
         FieldPanel('date'),
-        StreamFieldPanel('body'),
+        FieldPanel('image'),
+        StreamFieldPanel('body')
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        ''' Used for adding menu items '''
+        context = super(PostPage, self).get_context(request, *args, **kwargs)
+        context['menuitems'] = Page.objects.filter(
+            live=True, show_in_menus=True)
+        return context
