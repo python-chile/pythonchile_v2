@@ -31,7 +31,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
 
 
-		{% for post in blog_post %}
+		{% for post in blog_posts %}
         <div class="post-preview">
           <a href="{{ post.url }}">
             <h2 class="post-title">
@@ -43,7 +43,7 @@
           </a>
           <p class="post-meta">Publicado por
             {{ post.owner }}
-            en {{ post.date }}</p>
+            el {{ post.date }}</p>
         </div>
         <hr>
 		{% endfor %}

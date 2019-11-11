@@ -1,13 +1,58 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load static %}
+
+{% block body_class %}template-blog-page{% endblock %}
+
+{% block extra_css %}
+{% endblock extra_css %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.description }}</div>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+		  	<img src="{% static 'img/python_logo.png' %}" style="height: 150px;">
+            <h1>{{ page.title }}</h1>
+			<hr class="small">
+            <span class="subheading">{{ page.description }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    {% for post in page.get_children %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-    {% endfor %}
+<!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
 
-{% endblock %}
+		{% for post in blog_posts %}
+        <div class="post-preview">
+          <a href="{{ post.url }}">
+            <h2 class="post-title">
+              {{ post.title }}
+            </h2>
+            <h3 class="post-subtitle">
+              {{ post.description }}
+            </h3>
+          </a>
+          <p class="post-meta">Publicado por {{ post.owner }} el {{ post.date }}</p>
+        </div>
+        <hr>
+		{% endfor %}
+
+        <!-- Pager -->
+        {% comment %} <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+		 {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+

@@ -2,21 +2,52 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-{% with blocks=self.body %}
+  <!-- Page Header -->
+  {% if self.image %}
+  <header class="masthead" style="background-image: url('{{ self.image.url }}')">
+  {% else %}
+  <header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+  {% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{ page.title }}</h1>
+            <h2 class="subheading">{{ page.description }}</h2>
+            <span class="meta">Publicado por
+              {{ self.owner }}
+              el {{ self.date }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    {% for block in blocks %}
-        {% if block.block_type == 'heading' %}
-            <h2>{{ block.value }}</h2>
-        {% else %}
-           <section class="block-{{ block.block_type }}">
-               {{ block }}
-           </section>
-        {% endif %}
-    {% endfor %}
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        {% with blocks=self.body %}
 
-{% endwith %}
+            {% for block in blocks %}
+                {% if block.block_type == 'heading' %}
+                    <h2>{{ block.value }}</h2>
+                {% else %}
+                <section class="block-{{ block.block_type }}">
+                    {{ block }}
+                </section>
+                {% endif %}
+            {% endfor %}
 
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+        {% endwith %}
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
 {% endblock %}
