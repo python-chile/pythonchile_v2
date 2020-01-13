@@ -94,3 +94,6 @@ media/
 
 # VSCODE
 .vscode/
+
+# Ignore only root static folder from collectstatic
+/static
