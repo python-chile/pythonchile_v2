@@ -43,3 +43,4 @@ source bin/activate
 - [x] Registro de usuario
 - [x] Licencia
 - [ ] Deploy
+- [ ] Email backend
