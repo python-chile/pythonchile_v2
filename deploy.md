@@ -1,4 +1,5 @@
 ## Deploy en server
+
 Requisitos:
 - Ubuntu 18.04
 - Python 3.6+
@@ -72,5 +73,36 @@ Para salir de psql.
 \q
 ```
 
-### Instalar Supervisor
-### Instalar Gunicorn
+### Config Supervisor
+Instalar supervisor y copiar la config ubicada en ```src/pythonchile_v2/configs/pythonchile_supervisor.conf``` a ```/etc/supervisor/conf.d/```.
+
+Releer y recargar configs de supervisor.
+```
+sudo supervisor reread
+sudo supervisor reload
+```
+
+### Config nginx
+Instalar nginx y copiar config
+
+
+### Install Postgres
+```
+
+sudo apt-get install build-essential python3-dev
+sudo apt install postgresql-10 postgresql-server-dev-10 libpq-dev
+```
+
+### Migrar DB
+```
+./manage.py migrate --settings=pythonchile_v2.settings.production
+```
+### Copiar estaticos para deploy con collectstatic
+```
+./manage.py collectstatic --settings=pythonchile_v2.settings.production
+```
+### Createsuperuser
+```
+./manage.py createsuperuser --settings=pythonchile_v2.settings.production
+```
+
