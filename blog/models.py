@@ -33,9 +33,11 @@ class PostPage(Page):
     description = models.CharField("Descripción", max_length=255, blank=True)
     image = models.ImageField("Imagen principal", blank=True, null=True)
 
+    editor_features = ['h2', 'h3', 'bold', 'italic', 'link', 'code',
+                       'strikethrough', 'blockquote']
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
+        ('paragraph', blocks.RichTextBlock(features=editor_features)),
         ('code', CodeBlock(label='Code')),
         ('image', ImageChooserBlock()),
 
