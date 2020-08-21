@@ -1,0 +1,22 @@
+.profile-name {
+    min-height: 66px;
+    color: #f7802f;
+    font-weight: normal;
+    margin-top: 0px;
+    line-height: 1.19;
+    letter-spacing: 1.5px;
+}
+
+.profile-url, .profile-url:hover {
+    color: #ff6600;
+}
+
+.profile-description {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0.6px;
+    color: #595f73;
+}
