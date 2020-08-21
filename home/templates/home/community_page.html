@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags %}
+
+{% block body_class %}template-generalpage{% endblock %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+		  	<img src="{% static 'img/python_logo.png' %}" style="height: 80px;">
+            <h1>{{self.title}}</h1>
+			<hr class="small">
+            <span class="subheading">{{self.description}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 mx-auto">
+
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              {% with blocks=self.body %}
+
+              {% for block in blocks %}
+              {% if block.block_type == 'heading' %}
+              <h2>{{ block.value }}</h2>
+              {% else %}
+              <section class="block-{{ block.block_type }}">
+                {{ block }}
+              </section>
+              {% endif %}
+              {% endfor %}
+
+              {% endwith %}
+
+              <section class="container">
+                {% if self.team_profiles %}
+                <div class="row">
+                  {% for team_member in self.team_profiles.all %}
+                  {% image team_member.image fill-330x330 as member_image %}
+                  <div class="col-sm-4">
+
+                  {% if team_member.url %}
+                    <a class="profile-url" href="{{ team_member.url }}">
+                  {% endif %}
+                      <h3 class="profile-name">{{ team_member.name }}</h3>
+                  {% if team_member.url %}
+                    </a>
+                  {% endif %}
+                    <img src="{{ member_image.url }}">
+                    <div>
+                      <h4 class="profile-description">{{ team_member.description }}</h4>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </section>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+        <!-- Pager -->
+        {% comment %} <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+		    {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
