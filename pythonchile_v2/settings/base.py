@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     # Custom apps
     'blog',
+    'events',
 
     # Third party
     'wagtailcodeblock',
