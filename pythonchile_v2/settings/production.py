@@ -6,6 +6,8 @@ ALLOWED_HOSTS = ['www.pythonchile.cl', 'pythonchile.cl', ]
 
 ADMINS = [('Site admins', 'serverlogs@pythonchile.cl')]
 
+SERVER_EMAIL = 'server@pythonchile.cl'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', "")  # Blank to ensure it being set
 
