@@ -1,13 +1,58 @@
-<html>
+{% extends "base.html" %}
+{% load static %}
 
+{% block body_class %}template-blog-page{% endblock %}
 
-<h1>Eventos</h1>
+{% block extra_css %}
+{% endblock extra_css %}
 
+{% block content %}
 
-{% for event in events %}
-    {{ event }}
-{% endfor %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <img src="{% static 'img/pythonchile.png' %}" style="height: 100px;">
+                    <h2>{{ page.title }}</h2>
+                    <hr class="small">
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
 
+            {% for event in events %}
+            <div class="event-preview">
+                <a href="{{ event.url }}">
+                    <h2 class="event-title">
+                        {{ event.title }}
+                    </h2>
+                    <h3 class="event-subtitle">
+                        {{ event.description }}
+                    </h3>
+                </a>
+                <!-- <p class="event-meta">Publicado por {{ event.owner }} el {{ event.date }}</p> -->
+            </div>
+            <hr>
+            {% endfor %}
 
-</html>
+            <!-- Pager -->
+            {% comment %} <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
