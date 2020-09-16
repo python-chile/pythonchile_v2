@@ -14,4 +14,4 @@ jobs:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PIOLA }}
-          script: cd ${{ secrets.WEB_PATH }} && sudo whoami >> .test_action && sudo date >> .test-action
+          script: cd ${{ secrets.WEB_PATH }} && source ../bin/activate && which python >> .test_action && whoami >> .test_action && date >> .test-action
