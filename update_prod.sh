@@ -19,7 +19,7 @@ echo "- Installing requirements";
 $PYENV/bin/pip install -r $PRODUCTION/requirements/pro.txt || echo "Error installing requirements" >> deploys_log.txt
 
 echo "- Database pre-migrations backup"
-sudo -u postgres bash -c "pg_dump pythonchile_web > ~/backups/pythonchile_web_.$(timestamp).sql;" || echo "Error creating DB backup" >> deploys_log.txt
+pg_dump pythonchile_web > ~/backups/pythonchile_web_.$(timestamp).sql || echo "Error creating DB backup" >> deploys_log.txt
 
 echo "- Database migrations";
 $PYENV/bin/python manage.py migrate --settings=pythonchile_v2.settings.production || echo "Error db migrations" >> deploys_log.txt
