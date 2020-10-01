@@ -33,16 +33,21 @@ def _get_events_from_url(meetup_url):
         for event in events:
             name = event.find(class_='eventCardHead--title').get_text()
             date = event.find('time').get('datetime')
+            if len(event.findAll(class_='text--small padding--top margin--halfBottom')) > 0: 
+                description = event.findAll(class_='text--small padding--top margin--halfBottom')[1].get_text()
+            else:
+                description = ''
             url = event.find(class_='eventCard--link').get('href')
             # Check if event haves an image
             if event.find(class_='eventCardHead--photo'):
-                photo = event.find(class_='eventCardHead--photo').get('style')
+                image = event.find(class_='eventCardHead--photo').get('style')
             # Append event data as a dict
             event_list.append({
                 'name': name,
                 'date': date,
                 'url': url,
-                'photo': photo
+                'image': image,
+                'description': description
             })
         return event_list
 
@@ -53,19 +58,23 @@ def _get_events_from_url(meetup_url):
 
 
 def _create_events_pages(events):
-    ''' Creates EventPage for every from a incoming dictionary '''
+    ''' Creates EventPage for every item from an incoming dictionary '''
+    print(events)
     event_list = EventListPage.objects.first()
     for event in events:
         # Get or create event
         try:
-            event_full_url = f"https://www.meetup.com/{event['url']}"
+            event_full_url = f'https://www.meetup.com/{event["url"]}'
             # Check if Event page exists
             existing_event = EventPage.objects.filter(event_url=event_full_url).first()
+            image = _get_text_inside_parenthesis(event['image']) 
             if not existing_event:
                 event_obj = EventPage(
                     event_url=event_full_url,
                     title=event['name'],
-                    date=_timestamp_to_date_object(event['date'])
+                    date=_timestamp_to_date_object(event['date']),
+                    meetup_image_url=image,
+                    description=event['description']
                 )
                 # Add as a eventlist child
                 if event_list:
@@ -78,7 +87,7 @@ def _create_events_pages(events):
             print(f'Error on updating/creating {event}')
             print(e)
 
-    print('Finish creating events')
+    print('Finished creating events')
 
 
 def _timestamp_to_date_object(timestamp):
@@ -88,3 +97,11 @@ def _timestamp_to_date_object(timestamp):
     except ValueError as e:
         print(f'Failed parsing timestamp to datetime object: {e}')
         return None
+
+def _get_text_inside_parenthesis(string):
+    ''' 
+    Returns text inside a parenthesis.
+    Example: lorem(text) -> text 
+    '''
+    # Note: if no parenthesis will return the original string
+    return string[string.find("(")+1:string.find(")")]
