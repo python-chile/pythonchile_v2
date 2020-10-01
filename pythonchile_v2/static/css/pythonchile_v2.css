@@ -20,3 +20,19 @@
     letter-spacing: 0.6px;
     color: #595f73;
 }
+
+.image-wrapper {
+    margin: 1em 0;
+    position: relative;
+}
+
+.event-image {
+    max-height: 200px;
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.event-title {
+    margin-top: 20px;
+}

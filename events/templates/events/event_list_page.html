@@ -30,14 +30,32 @@
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
 
+
             {% for event in events %}
+            <div class="mb-3" >
+                <div class="row no-gutters">
+                    <div class="col-md-8">
+                        <div>
+                            <a href="{{ event.event_url }}">
+                                <h5 class="event-title">{{ event.title }}</h5>
+                            </a>
+                            <p>{{ event.description | truncatechars:200}}</p>
+                            <p><small class="text-muted">{{ event.date }}</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 image-wrapper">
+                        <img class="event-image" src="{{ event.meetup_image_url }}" class="card-img" style="vertical-align: middle;display: inline-block;position: relative;" alt="...">
+                    </div>
+                </div>
+              </div>
+
             <div class="event-preview">
                 <a href="{{ event.url }}">
                     <h2 class="event-title">
-                        {{ event.title }}
+                        
                     </h2>
                     <h3 class="event-subtitle">
-                        {{ event.description }}
+                        
                     </h3>
                 </a>
                 <!-- <p class="event-meta">Publicado por {{ event.owner }} el {{ event.date }}</p> -->
