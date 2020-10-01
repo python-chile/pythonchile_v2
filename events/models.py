@@ -32,8 +32,9 @@ class EventPage(Page):
     date = models.DateField('Fecha publicación')
     is_meetup = models.BooleanField('Evento de meetup', default=False)
     event_url = models.URLField('URL', max_length=250, blank=True, null=True)
-    description = models.CharField('Descripción', max_length=255, blank=True)
+    description = models.TextField('Descripción', blank=True)
     image = models.ImageField('Imagen principal', blank=True, null=True)
+    meetup_image_url = models.URLField('Meetup image url', blank=True, null=True)
 
     editor_features = ['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'code',
                        'ol', 'ul', 'hr', 'document-link', 'image', 'embed',
