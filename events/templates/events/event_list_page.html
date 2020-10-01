@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}template-blog-page{% endblock %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <img src="{% static 'img/pythonchile.png' %}" style="height: 100px;">
+                    <h2>{{ page.title }}</h2>
+                    <hr class="small">
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+
+            {% for event in events %}
+            <div class="mb-3" >
+                <div class="row no-gutters">
+                    <div class="col-md-8">
+                        <div>
+                            <a href="{{ event.event_url }}">
+                                <h5 class="event-title">{{ event.title }}</h5>
+                            </a>
+                            <p>{{ event.description | truncatechars:180}}</p>
+                            <p><small class="text-muted">{{ event.date }}</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 image-wrapper">
+                        <img class="event-image" src="{{ event.meetup_image_url }}" class="card-img" style="vertical-align: middle;display: inline-block;position: relative;" alt="...">
+                    </div>
+                </div>
+              </div>
+
+            <div class="event-preview">
+                <a href="{{ event.url }}">
+                    <h2 class="event-title">
+                        
+                    </h2>
+                    <h3 class="event-subtitle">
+                        
+                    </h3>
+                </a>
+                <!-- <p class="event-meta">Publicado por {{ event.owner }} el {{ event.date }}</p> -->
+            </div>
+            <hr>
+            {% endfor %}
+
+            <!-- Pager -->
+            {% comment %} <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
