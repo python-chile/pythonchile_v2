@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+  <!-- Page Header -->
+  {% if self.image %}
+  <header class="masthead" style="background-image: url('{{ self.image.url }}')">
+  {% else %}
+  <header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+  {% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <img src="{% static 'img/pythonchile.png' %}" style="height: 100px;">
+            <h2>{{ page.title }}</h2>
+            <span class="meta">{{ self.date }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+        <div>
+            <a href="{{ page.event_url }}">
+                <img  src="{{ page.meetup_image_url }}" class="card-img" alt="Event image">
+            </a>
+        </div>
+        <div>
+            {{ page.description |richtext }}
+        </div>
+        <p>
+            <a href="{{ page.event_url }}">
+                Link del evento
+            </a>
+        </p>
+
+        {% with blocks=self.body %}
+
+            {% for block in blocks %}
+                {% if block.block_type == 'heading' %}
+                    <h2>{{ block.value }}</h2>
+                {% else %}
+                <section class="block-{{ block.block_type }}">
+                    {{ block }}
+                </section>
+                {% endif %}
+            {% endfor %}
+
+        {% endwith %}
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+{% endblock %}
