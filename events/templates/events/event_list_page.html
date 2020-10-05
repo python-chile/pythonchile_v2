@@ -29,8 +29,6 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-
-
             {% for event in events %}
             <div class="mb-3" >
                 <div class="row no-gutters">
@@ -48,18 +46,6 @@
                     </div>
                 </div>
               </div>
-
-            <div class="event-preview">
-                <a href="{{ event.url }}">
-                    <h2 class="event-title">
-                        
-                    </h2>
-                    <h3 class="event-subtitle">
-                        
-                    </h3>
-                </a>
-                <!-- <p class="event-meta">Publicado por {{ event.owner }} el {{ event.date }}</p> -->
-            </div>
             <hr>
             {% endfor %}
 
