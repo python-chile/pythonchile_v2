@@ -19,7 +19,8 @@
             <h3 class="subheading">{{ page.description }}</h3>
             <span class="meta">Publicado por
               {{ self.owner }}
-              el {{ self.date }}</span>
+              el {{ self.date }}, <a href="{{page.get_url}}#disqus_thread">comentarios del post </a> 
+            </span>
           </div>
         </div>
       </div>
@@ -30,7 +31,7 @@
   <article>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-10 col-md-10 mx-auto">
         {% with blocks=self.body %}
 
             {% for block in blocks %}
@@ -51,4 +52,18 @@
   </article>
 
   <hr>
+  <!--Comments-->
+  <div class="container" style="padding-right: 50px;padding-left: 50px;">
+    <div class="row">
+      <div class="col-lg-10  col-md-10 mx-auto " id="disqus_thread">
+      {% include 'comments.html' with url=page.url %}
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
+
+
+{% block extra_js %}
+    <script id="dsq-count-scr" src="//python-chile.disqus.com/count.js" async></script>
 {% endblock %}
