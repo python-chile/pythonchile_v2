@@ -19,7 +19,7 @@
             <h3 class="subheading">{{ page.description }}</h3>
             <span class="meta">Publicado por
               {{ self.owner }}
-              el {{ self.date }}, <a href="{{page.get_url}}#disqus_thread">comentarios del post </a> 
+              el {{ self.date }}
             </span>
           </div>
         </div>
@@ -63,7 +63,3 @@
   
 {% endblock %}
 
-
-{% block extra_js %}
-    <script id="dsq-count-scr" src="//python-chile.disqus.com/count.js" async></script>
-{% endblock %}
