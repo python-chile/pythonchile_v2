@@ -11,6 +11,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtailcodeblock.blocks import CodeBlock
 
+from utils.models import CustomPage
 from blog.models import PostPage
 
 
@@ -35,16 +36,14 @@ class ImageItem(models.Model):
         abstract = True
 
 
-class HomePage(Page):
+class HomePage(CustomPage):
 
     def get_context(self, request, *args, **kwargs):
         ''' Used for adding menu items to home'''
-        context = super(HomePage, self).get_context(request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
+        context = super(HomePage, self).get_context(
+            request, *args, **kwargs)
         context['blog_posts'] = PostPage.objects.filter(
             live=True).order_by('-date')[:5]
-
         return context
 
     subpage_types = [
@@ -55,7 +54,7 @@ class HomePage(Page):
     ]
 
 
-class GeneralPage(Page):
+class GeneralPage(CustomPage):
     ''' Multiuse page for general content '''
     description = models.CharField("Descripción", max_length=255, blank=True)
     image = models.ImageField("Imagen principal", blank=True, null=True)
@@ -74,14 +73,6 @@ class GeneralPage(Page):
         StreamFieldPanel('body')
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        ''' Used for adding menu items '''
-        context = super(GeneralPage, self).get_context(
-            request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
-        return context
-
     subpage_types = []
 
 
@@ -98,7 +89,7 @@ class CommunityPageTeamItem(Orderable, ImageItem):
     ]
 
 
-class CommunityPage(Page):
+class CommunityPage(CustomPage):
     ''' Multiuse page for general content '''
     description = models.CharField("Descripción", max_length=255, blank=True)
     image = models.ImageField("Imagen principal", blank=True, null=True)
@@ -116,13 +107,5 @@ class CommunityPage(Page):
         StreamFieldPanel('body'),
         InlinePanel('team_profiles', label="Perfil equipo"),
     ]
-
-    def get_context(self, request, *args, **kwargs):
-        ''' Used for adding menu items '''
-        context = super(CommunityPage, self).get_context(
-            request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
-        return context
 
     subpage_types = []
