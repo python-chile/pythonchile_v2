@@ -47,6 +47,12 @@ class HomePage(Page):
 
         return context
 
+    subpage_types = [
+        'blog.BlogPage',
+        'events.EventListPage',
+        'home.GeneralPage',
+        'home.CommunityPage'
+    ]
 
 
 class GeneralPage(Page):
@@ -75,6 +81,8 @@ class GeneralPage(Page):
         context['menuitems'] = Page.objects.filter(
             live=True, show_in_menus=True)
         return context
+
+    subpage_types = []
 
 
 class CommunityPageTeamItem(Orderable, ImageItem):
@@ -116,3 +124,5 @@ class CommunityPage(Page):
         context['menuitems'] = Page.objects.filter(
             live=True, show_in_menus=True)
         return context
+
+    subpage_types = []

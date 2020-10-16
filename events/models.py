@@ -26,6 +26,8 @@ class EventListPage(Page):
             live=True).order_by('-date')
         return context
 
+    subpage_types = ['events.EventPage']
+
 
 class EventPage(Page):
     ''' Event page content '''
@@ -60,3 +62,5 @@ class EventPage(Page):
         context['menuitems'] = Page.objects.filter(
             live=True, show_in_menus=True)
         return context
+
+    subpage_types = []

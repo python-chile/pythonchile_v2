@@ -26,6 +26,8 @@ class BlogPage(Page):
             live=True).order_by('-date')
         return context
 
+    subpage_types = ['blog.PostPage']
+
 
 class PostPage(Page):
     ''' Post content '''
@@ -57,3 +59,5 @@ class PostPage(Page):
         context['menuitems'] = Page.objects.filter(
             live=True, show_in_menus=True)
         return context
+
+    subpage_types = []
