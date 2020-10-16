@@ -5,11 +5,12 @@ from wagtail.core import blocks
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
-
 from wagtailcodeblock.blocks import CodeBlock
 
+from utils.models import CustomPage
 
-class BlogPage(Page):
+
+class BlogPage(CustomPage):
     ''' Displays a lists of PostPages'''
     description = models.CharField(max_length=255, blank=True,)
 
@@ -20,14 +21,14 @@ class BlogPage(Page):
     def get_context(self, request, *args, **kwargs):
         ''' Used for adding menu items'''
         context = super(BlogPage, self).get_context(request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
         context['blog_posts'] = PostPage.objects.filter(
             live=True).order_by('-date')
         return context
 
+    subpage_types = ['blog.PostPage']
 
-class PostPage(Page):
+
+class PostPage(CustomPage):
     ''' Post content '''
     date = models.DateField("Fecha publicación")
     description = models.CharField("Descripción", max_length=255, blank=True)
@@ -51,9 +52,4 @@ class PostPage(Page):
         StreamFieldPanel('body')
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        ''' Used for adding menu items '''
-        context = super(PostPage, self).get_context(request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
-        return context
+    subpage_types = []

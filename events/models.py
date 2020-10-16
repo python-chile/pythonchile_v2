@@ -5,11 +5,12 @@ from wagtail.core import blocks
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
-
 from wagtailcodeblock.blocks import CodeBlock
 
+from utils.models import CustomPage
 
-class EventListPage(Page):
+
+class EventListPage(CustomPage):
     ''' Displays a lists of EventPage '''
     description = models.CharField(max_length=255, blank=True,)
 
@@ -18,16 +19,16 @@ class EventListPage(Page):
     ]
 
     def get_context(self, request, *args, **kwargs):
-        ''' Used for adding menu items'''
+        ''' Adding events as context'''
         context = super(EventListPage, self).get_context(request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
         context['events'] = EventPage.objects.filter(
             live=True).order_by('-date')
         return context
 
+    subpage_types = ['events.EventPage']
 
-class EventPage(Page):
+
+class EventPage(CustomPage):
     ''' Event page content '''
     date = models.DateField('Fecha publicación')
     is_meetup = models.BooleanField('Evento de meetup', default=False)
@@ -54,9 +55,4 @@ class EventPage(Page):
         StreamFieldPanel('body')
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        ''' Used for adding menu items '''
-        context = super(EventPage, self).get_context(request, *args, **kwargs)
-        context['menuitems'] = Page.objects.filter(
-            live=True, show_in_menus=True)
-        return context
+    subpage_types = []
