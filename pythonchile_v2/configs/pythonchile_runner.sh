@@ -5,6 +5,7 @@ TIMEOUT=90
 BIND='127.0.0.1:9020'
 USER='pythonchile'
 DJANGO_SETTINGS_MODULE=pythonchile_v2.settings.production
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 
 . /opt/pythonchile_env/bin/activate
 cd /opt/pythonchile_env/src

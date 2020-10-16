@@ -16,11 +16,7 @@
           <div class="site-heading">
             <img src="{% static 'img/pythonchile.png' %}" style="height: 100px;">
             <h2>{{ page.title }}</h2>
-            <h3 class="subheading">{{ page.description }}</h3>
-            <span class="meta">Publicado por
-              {{ self.owner }}
-              el {{ self.date }}
-            </span>
+            <span class="meta">{{ self.date }}</span>
           </div>
         </div>
       </div>
@@ -31,7 +27,24 @@
   <article>
     <div class="container">
       <div class="row">
-        <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+        <div>
+            <a href="{{ page.event_url }}">
+                <img  src="{{ page.meetup_image_url }}" class="card-img" alt="Event image">
+            </a>
+        </div>
+        <div>
+            <p>
+                {{ page.description }}
+            </p>
+        </div>
+        <p>
+            <a href="{{ page.event_url }}">
+                Link del evento
+            </a>
+        </p>
+
         {% with blocks=self.body %}
 
             {% for block in blocks %}
@@ -45,21 +58,10 @@
             {% endfor %}
 
         {% endwith %}
-
         </div>
       </div>
     </div>
   </article>
 
   <hr>
-  <!--Comments-->
-  <div class="container" style="padding-right: 50px;padding-left: 50px;">
-    <div class="row">
-      <div class="col-lg-10  col-md-10 mx-auto " id="disqus_thread">
-      {% include 'comments.html' with url=page.url %}
-      </div>
-    </div>
-  </div>
-  
 {% endblock %}
-
