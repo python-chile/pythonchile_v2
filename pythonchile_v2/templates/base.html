@@ -66,13 +66,15 @@
             {% endfor %}
 
             {% comment %} Registration, login & logout {% endcomment %}
+            {% comment %}
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="{% url 'account_logout' %}">Cerrar sesión</a>
-                </li>
+            <li class="nav-item">
+                <a href="{% url 'account_logout' %}">Cerrar sesión</a>
+            </li>
             {% else %}
-                <li class="nav-item"><a href="{% url 'account_login' %}">Login</a></li>
+            <li class="nav-item"><a href="{% url 'account_login' %}">Login</a></li>
             {% endif %}
+            {% endcomment %}
             </ul>
 
             </ul>
