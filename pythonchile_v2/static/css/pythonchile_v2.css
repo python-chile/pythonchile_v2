@@ -36,3 +36,15 @@
 .event-title {
     margin-top: 20px;
 }
+
+img.full-width {
+    display:block;
+    margin:auto;
+}
+
+img.right {
+    float: right;
+}
+img.left {
+    float: left;
+}
