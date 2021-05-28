@@ -36,7 +36,7 @@ six==1.12.0
 sqlparse==0.3.0
 traitlets==4.3.3
 Unidecode==1.1.1
-urllib3==1.25.6
+urllib3==1.25.8
 wagtail==2.11.6
 wagtailcodeblock==1.15.0.0
 wcwidth==0.1.7
